@@ -1,63 +1,86 @@
 var mainItemEl = document.createElement("main");
-var bodyItemEl=document.querySelector('#body');
-var questionArr = [
-    {question: "What is your name?",
-    op1: "1.",
-    op2: "2.",
-    op3: "3.",
-    op4: "4.",
-    correct: {
-            op2: "2."
-        }
+var bodyItemEl=document.getElementById('body');
+var optionCounter=0;
+var answerEl=document.getElementById('answer');
+
+const questionArr = [
+    {question: "Commonly used data types DO NOT Include",
+    answers: [
+        {Text: '1. Strings', correct : false},
+        {Text: '2. Boolean', correct : false},
+        {Text: '3. Alerts', correct : true},
+        {Text: '4. Numbers', correct : false}
+        ]
     },
-    {question: "What is your name2?",
-    op1: "1.",
-    op2: "2.",
-    op3: "3.",
-    op4: "4.",
-    correct: {
-            op2: "2."
-        }
+    {question: "Condition in an if/else statement is enclosed with ___?",
+    answers: [
+        {Text: '1. Semicolon', correct : false},
+        {Text: '2. Parenthesis', correct : true},
+        {Text: '3. Comma', correct : false},
+        {Text: '4. Curly brackets', correct : false}
+        ]
     },
-    {question: "What is your name3?",
-    op1: "1.",
-    op2: "2.",
-    op3: "3.",
-    op4: "4.",
-    correct: {
-            op2: "2."
-        }
+    {question: "Arrays in javascript can be used to store?",
+    answers: [
+        {Text: '1. Numbers and arrays', correct : false},
+        {Text: '2. Other Arrays', correct : false},
+        {Text: '3. Booleans', correct : false},
+        {Text: '4. All of the above', correct : true}
+        ]
     },
-    {question: "What is your name4?",
-    op1: "1.",
-    op2: "2.",
-    op3: "3.",
-    op4: "4.",
-    correct: {
-            op2: "2."
-        }
-    },
-    {question: "What is your name5?",
-    op1: "1.",
-    op2: "2.",
-    op3: "3.",
-    op4: "4.",
-    correct: {
-            op2: "2."
-        }
+    {question: "Which of the following is a good tool to debug errors?",
+    answers: [
+        {Text: '1. console.log()', correct : true},
+        {Text: '2. for loops', correct : false},
+        {Text: '3. if statements', correct : false},
+        {Text: '4. terminal/bash', correct : false}
+        ]
 }];
 
-var questions = function () {
-    //start timer here 
-    for(i=0;i<questionArr.length;i++){
-        mainItemEl.innerHTML=' ';
-        var titleEl=document.createElement("h2");
-        titleEl.className="pagecentre";
-        titleEl.textContent=questionArr[i].question;
-        mainItemEl.appendChild(titleEl);
-        bodyItemEl.appendChild(mainItemEl);
-    }
+var finalscore=function() {
+
+};
+
+var checkanswer = function(event) {
+    var targetEl = event.target;
+    var targetId = targetEl.id;
+    var correct= document.createElement("h3");
+    var lineEL=document.createElement("hr");
     
+    if(questionArr[optionCounter].answers[targetId].correct){
+        correct.className="right";
+        correct.textContent="Correct!";
+    } else {
+        correct.className="wrong";
+        correct.textContent="Wrong!";
+    }
+    answerEl.appendChild(lineEL);
+    answerEl.appendChild(correct);
+    optionCounter++;
+    mainItemEl.removeEventListener("click",checkanswer);
+    return;
+};
+
+var question = function () {
+    //start timer here 
+    mainItemEl.innerHTML=' ';
+    answerEl.innerHTML=' ';
+    var titleEl=document.createElement("h2");
+    // mainItemEl.className="pagecentre";
+    if(optionCounter>=questionArr.length)
+     finalscore();
+    titleEl.textContent=questionArr[optionCounter].question;
+    mainItemEl.appendChild(titleEl);
+    for(n=0;n<4;n++){
+    var choice=document.createElement("button");
+    choice.className="btn choice";
+    choice.textContent=questionArr[optionCounter].answers[n].Text;
+    choice.setAttribute="id";
+    choice.id=n;
+    mainItemEl.appendChild(choice);
+    };
+    mainItemEl.addEventListener("click",checkanswer);
+    setTimeout(question,4000);
 };
 
 
@@ -70,7 +93,7 @@ var reset = function() {
     startBtnEl.className="btn startbtn";
     mainItemEl.appendChild(startBtnEl);
     bodyItemEl.appendChild(mainItemEl);
-    startBtnEl.addEventListener("click",questions);
+    startBtnEl.addEventListener("click",question);
 };
 
 reset();
