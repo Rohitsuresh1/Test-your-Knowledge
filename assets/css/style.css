@@ -1,0 +1,60 @@
+header {
+    display: block;
+    background-color: antiquewhite;
+}
+
+.viewscorebtn {
+    color: blue;
+    float: left;
+    margin-top: 5px;
+}
+
+.time {
+  float: right;
+margin-top: 5px;
+  
+}
+
+.firstpage {
+    text-align: center;
+    transform: translate(0%, 100%);
+} 
+
+h1 {
+    position: relative;
+    left: -40px;
+    
+}
+
+.pagecentre {
+    text-align: center;
+    position: relative;
+    top : 200px;
+    left: -40px;
+    transform: translate(0%, 100%);
+}
+
+.btn {
+    outline: 2px; 
+    margin:3px;
+    display: inline-block;
+    border-radius: 12px;
+    box-shadow: 1px 1px grey; 
+  }
+
+.startbtn {
+    font-size: 1.4rem;
+    padding: 5px 7px;
+    margin: 3px;
+    background: var(--secondary);
+    color: rgb(192, 31, 31);
+}
+
+.btn:hover {
+    background-color: antiquewhite;
+}
+.btn:active {
+    box-shadow: 3px 3px grey;
+    background-color: rgb(123, 190, 221);
+}
+
