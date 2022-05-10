@@ -46,6 +46,12 @@ right: 35px;
     text-align: center;
 } 
 
+.form {
+    position: relative;
+    top: 40px;
+}
+
+
 .hide {
     visibility: hidden;
 }
@@ -95,6 +101,13 @@ hr {
     background: var(--secondary);
     color: rgb(192, 31, 31);
 }
+
+.homebtn {
+    position: relative;
+    top: 80px;
+    left: -60px;
+}
+
 
 .btn:hover {
     background-color: antiquewhite;
