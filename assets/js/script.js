@@ -9,6 +9,11 @@ var formEl=document.createElement("form");
 var inputEl=document.createElement("input");
 var timerOn=false;
 var time =30;
+var homeBtnEl=document.createElement("button");
+homeBtnEl.className="btn startbtn homebtn";
+homeBtnEl.setAttribute="id";
+homeBtnEl.id="homebtn";
+homeBtnEl.textContent="Go Back";
 
 
 
@@ -53,14 +58,18 @@ var scoreBoard =function() {
     }
     // else, load up saved tasks
     savedTasks= JSON.parse(savedTasks);
+    bodyItemEl.innerHTML=' ';
     // loop through savedTasks array
     console.log("Saved tasks found! parse", savedTasks);
     for (var i = 0; i < savedTasks.length; i++) {
-        console.log(savedTasks[i]);
-        mainItemEl.innerHTML='<h4> Name: '+savedTasks[i].nameInput+'   Score: '+savedTasks[i].saveScore+'</h4>';
-        bodyItemEl.appendChild(mainItemEl);
+       // console.log(savedTasks[i]);
+        bodyItemEl.innerHTML+="<h4> Name: "+savedTasks[i].nameInput +"  Score: "+ savedTasks[i].saveScore+"</h4>";
+        console.log("inner html",mainItemEl.innerHTML);
+        // bodyItemEl.appendChild(mainItemEl);
+        console.log("body item",bodyItemEl);
     }
-    window.alert("I see you ",savedTasks[(0)].nameInput);
+    bodyItemEl.appendChild(homeBtnEl);
+    bodyItemEl.addEventListener("click", restart);
 };
 var restart = function (event) {
     if(event.target.id=="scorebtn"){
@@ -127,11 +136,7 @@ var addName = function(event) {
         viewBtnEl.textContent="View Scores";
         viewBtnEl.className+=(" startbtn viewbtn");
         mainItemEl.appendChild(viewBtnEl);
-        var homeBtnEl=document.createElement("button");
-        homeBtnEl.className="btn startbtn homebtn";
-        homeBtnEl.setAttribute="id";
-        homeBtnEl.id="homebtn";
-        homeBtnEl.textContent="Go Back";
+        
         mainItemEl.appendChild(homeBtnEl);
         mainItemEl.addEventListener("click", restart);
     }
@@ -195,6 +200,7 @@ var question = function () {
 
 var reset = function() {
     scoreBtnEl.style.display="block";
+    bodyItemEl.innerHTML=' ';
     formEl.innerHTML=' ';
     time=30;
     optionCounter=0;
