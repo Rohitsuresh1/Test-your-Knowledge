@@ -105,9 +105,14 @@ hr {
 .homebtn {
     position: relative;
     top: 80px;
-    left: -60px;
+    left: 30px;
 }
 
+.viewbtn {
+    position: relative;
+    top:80px;
+    left: 20px;
+}
 
 .btn:hover {
     background-color: antiquewhite;

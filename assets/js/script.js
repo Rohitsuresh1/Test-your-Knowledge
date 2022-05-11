@@ -7,6 +7,10 @@ var score =0;
 var scoreBtnEl=document.getElementById("scorebtn")
 var formEl=document.createElement("form");
 var inputEl=document.createElement("input");
+var timerOn=false;
+var time =30;
+
+
 
 const questionArr = [
     {question: "Commonly used data types DO NOT Include",
@@ -41,10 +45,45 @@ const questionArr = [
         {Text: '4. terminal/bash', correct : false}
         ]
 }];
+var scoreBoard =function() {
+    var savedTasks = localStorage.getItem("scores");
+    // if there are no tasks, set tasks to an empty array and return out of the function
+    if (!savedTasks) {
+        return false;
+    }
+    // else, load up saved tasks
+    savedTasks= JSON.parse(savedTasks);
+    // loop through savedTasks array
+    console.log("Saved tasks found! parse", savedTasks);
+    for (var i = 0; i < savedTasks.length; i++) {
+        console.log(savedTasks[i]);
+        mainItemEl.innerHTML='<h4> Name: '+savedTasks[i].nameInput+'   Score: '+savedTasks[i].saveScore+'</h4>';
+        bodyItemEl.appendChild(mainItemEl);
+    }
+    window.alert("I see you ",savedTasks[(0)].nameInput);
+};
+var restart = function (event) {
+    if(event.target.id=="scorebtn"){
+        scoreBoard();
+    } else if (event.target.id=="homebtn"){
+        reset();
+    }
 
-var time =50;
+};
 
-
+var setTimer = function() {
+    var startTime = setInterval(function() {
+        
+        if(time<=0){
+            time=0;
+            optionCounter=questionArr.length;
+            clearInterval(startTime);
+        } 
+        timeEl.textContent="Time: "+ time;
+        time-=1;
+    },1000);
+    timerOn=true;
+};
 
 var finalscore=function(titleEl) {
     timeEl.style.display="none";
@@ -72,12 +111,29 @@ var addName = function(event) {
     var taskNameInput = document.querySelector("input[name='name']").value;
     if (!taskNameInput) alert("You need to fill in a name or initials!");
     else{
-        localStorage.setItem(taskNameInput,score);
+        var data = [{
+            nameInput: taskNameInput,
+            saveScore: score
+        }];
+        var old = JSON.parse(localStorage.getItem("scores"));
+        if(old===null)
+         old=[];
+        else {
+            Array.prototype.push.apply(data,old);
+            }
+        var saveScore = localStorage.setItem("scores",JSON.stringify(data));
+        var viewBtnEl = scoreBtnEl;
+        viewBtnEl.style.display="block";
+        viewBtnEl.textContent="View Scores";
+        viewBtnEl.className+=(" startbtn viewbtn");
+        mainItemEl.appendChild(viewBtnEl);
         var homeBtnEl=document.createElement("button");
         homeBtnEl.className="btn startbtn homebtn";
+        homeBtnEl.setAttribute="id";
+        homeBtnEl.id="homebtn";
         homeBtnEl.textContent="Go Back";
         mainItemEl.appendChild(homeBtnEl);
-
+        mainItemEl.addEventListener("click", restart);
     }
 };
 
@@ -102,20 +158,24 @@ var checkanswer = function(event) {
     return;
 };
 
-var callTimer = function() {
-    var startTime = setInterval(function() {
-        time-=1;
-        timeEl.textContent="Time: "+ time;
-    },1000);
-};
+// var callTimer = function() {
+   
+// };
 
 var question = function () {
     //start timer here 
+    
+    if(!timerOn){
+        setTimer();
+    }
+    timeEl.style.display="block";
     mainItemEl.innerHTML=' ';
     answerEl.innerHTML=' ';
     var titleEl=document.createElement("h2");
-    if(optionCounter>=questionArr.length){
-        score=time;
+    if(optionCounter>=questionArr.length||time<0){
+        score=time+1;
+        time=0;
+        optionCounter=questionArr.length;
         finalscore(titleEl);
     }
     titleEl.textContent=questionArr[optionCounter].question;
@@ -129,12 +189,17 @@ var question = function () {
         mainItemEl.appendChild(choice);
     };
     mainItemEl.addEventListener("click",checkanswer);
-    setTimeout(question,1000);
+    setTimeout(question,2000);
 };
 
 
 var reset = function() {
-    mainItemEl.innerHTML= "<h1>Coding Quiz Challange</h1><p>Try to answer the following 5 questions as fast as possible</p><p>For each wrong answer, 10 secods would be deducted from your time</p><p>Time remaining at the end of 5 questions would be your score.</p><p>Good Luck!</p>";
+    scoreBtnEl.style.display="block";
+    formEl.innerHTML=' ';
+    time=30;
+    optionCounter=0;
+    timerOn=false;
+    mainItemEl.innerHTML= "<h1>Coding Quiz Challenge</h1><p>Try to answer the following 5 questions as fast as possible</p><p>For each wrong answer, 10 secods would be deducted from your time</p><p>Time remaining at the end of 5 questions would be your score.</p><p>Good Luck!</p>";
     mainItemEl.className="firstpage";
     var startBtnEl=document.createElement("button");
     startBtnEl.textContent="Start Quiz";
@@ -142,7 +207,7 @@ var reset = function() {
     mainItemEl.appendChild(startBtnEl);
     bodyItemEl.appendChild(mainItemEl);
     startBtnEl.addEventListener("click",question);
-    callTimer();
+    timeEl.style.display="none";
 };
 
 
