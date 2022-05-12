@@ -60,13 +60,8 @@ var scoreBoard =function() {
     savedTasks= JSON.parse(savedTasks);
     bodyItemEl.innerHTML=' ';
     // loop through savedTasks array
-    console.log("Saved tasks found! parse", savedTasks);
     for (var i = 0; i < savedTasks.length; i++) {
-       // console.log(savedTasks[i]);
         bodyItemEl.innerHTML+="<h4> Name: "+savedTasks[i].nameInput +"  Score: "+ savedTasks[i].saveScore+"</h4>";
-        console.log("inner html",mainItemEl.innerHTML);
-        // bodyItemEl.appendChild(mainItemEl);
-        console.log("body item",bodyItemEl);
     }
     bodyItemEl.appendChild(homeBtnEl);
     bodyItemEl.addEventListener("click", restart);
@@ -199,6 +194,7 @@ var question = function () {
 
 
 var reset = function() {
+    scoreBtnEl.className="btn viewscorebtn";
     scoreBtnEl.style.display="block";
     bodyItemEl.innerHTML=' ';
     formEl.innerHTML=' ';
@@ -211,6 +207,7 @@ var reset = function() {
     startBtnEl.textContent="Start Quiz";
     startBtnEl.className="btn startbtn";
     mainItemEl.appendChild(startBtnEl);
+    mainItemEl.appendChild(scoreBtnEl);
     bodyItemEl.appendChild(mainItemEl);
     startBtnEl.addEventListener("click",question);
     timeEl.style.display="none";
