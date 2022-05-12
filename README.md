@@ -15,11 +15,13 @@ When the user clicks start game button, a countdown starts with the question dis
 ## Screenshot
 
 
-    ![Screen Shot](/assets/Screenshots/Screen%20Shot%201.png)
+![Screen Shot](https://github.com/Rohitsuresh1/Test-your-Knowledge/blob/417e381b3635fa1e10c1cb965af0f3d8a49412f9/assets/Screenshots/Screen%20Shot%201.png)
 
-    ![Screen Shot](/assets/Screenshots/Screen%20Shot%202.png)
 
-    ![Screen Shot](/assets/Screenshots/Screen%20Shot%203.png)
+![Screen Shot](https://github.com/Rohitsuresh1/Test-your-Knowledge/blob/main/assets/Screenshots/Screen%20Shot%202.png)
+
+
+![Screen Shot](https://github.com/Rohitsuresh1/Test-your-Knowledge/blob/main/assets/Screenshots/Screen%20Shot%203.png)
    
 
 ## Licences
