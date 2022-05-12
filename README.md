@@ -15,9 +15,13 @@ When the user clicks start game button, a countdown starts with the question dis
 ## Screenshot
 
 
-    ![Screen Shot](https://github.com/Rohitsuresh1/Password-Generator/blob "Screenshot")
+    ![Screen Shot](/assets/Screenshots/Screen%20Shot%201.png)
+
+    ![Screen Shot](/assets/Screenshots/Screen%20Shot%202.png)
+
+    ![Screen Shot](/assets/Screenshots/Screen%20Shot%203.png)
    
-   
+
 ## Licences
 
 This application uses MIT license.
