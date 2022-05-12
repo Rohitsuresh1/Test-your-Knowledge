@@ -10,7 +10,6 @@ var inputEl=document.createElement("input");
 var timerOn=false;
 var time =30;
 var homeBtnEl=document.createElement("button");
-homeBtnEl.className="btn startbtn homebtn";
 homeBtnEl.setAttribute="id";
 homeBtnEl.id="homebtn";
 homeBtnEl.textContent="Go Back";
@@ -50,22 +49,46 @@ const questionArr = [
         {Text: '4. terminal/bash', correct : false}
         ]
 }];
+
+var deleteData = function(){
+    localStorage.clear();
+    scoreBoard();
+};
+
 var scoreBoard =function() {
     var savedTasks = localStorage.getItem("scores");
+    var clearData=document.createElement("button");
+    clearData.className="btn startbtn cleardata";
+    clearData.textContent="Clear Score Board";
+    homeBtnEl.className="btn startbtn";
+    bodyItemEl.innerHTML=' ';
+    mainItemEl.innerHTML= "<h1>Score Board</h1>";
     // if there are no tasks, set tasks to an empty array and return out of the function
     if (!savedTasks) {
+        mainItemEl.innerHTML+= "<h3>Nothing to show!</h3>";
+        bodyItemEl.appendChild(mainItemEl);
+        bodyItemEl.appendChild(homeBtnEl);
+        bodyItemEl.addEventListener("click", restart);
         return false;
     }
     // else, load up saved tasks
     savedTasks= JSON.parse(savedTasks);
-    bodyItemEl.innerHTML=' ';
+    bodyItemEl.appendChild(mainItemEl);
+    var displayNameEl=document.createElement("div");
+    displayNameEl.className="name";
     // loop through savedTasks array
     for (var i = 0; i < savedTasks.length; i++) {
-        bodyItemEl.innerHTML+="<h4> Name: "+savedTasks[i].nameInput +"  Score: "+ savedTasks[i].saveScore+"</h4>";
+        displayNameEl.innerHTML+="<p class='nameline'>Name: <span class='ascouple'>"+savedTasks[i].nameInput+"</span></p><p class='scoreclass'> Score: <span class='ascouple2'>"+ savedTasks[i].saveScore+"</span></p><div><br></div>";
     }
+    clearData.addEventListener("click",deleteData);
+    bodyItemEl.appendChild(displayNameEl);
+    console.log(bodyItemEl);
+    bodyItemEl.appendChild(clearData);
     bodyItemEl.appendChild(homeBtnEl);
     bodyItemEl.addEventListener("click", restart);
 };
+
+
 var restart = function (event) {
     if(event.target.id=="scorebtn"){
         scoreBoard();
@@ -201,7 +224,8 @@ var reset = function() {
     time=30;
     optionCounter=0;
     timerOn=false;
-    mainItemEl.innerHTML= "<h1>Coding Quiz Challenge</h1><p>Try to answer the following 5 questions as fast as possible</p><p>For each wrong answer, 10 secods would be deducted from your time</p><p>Time remaining at the end of 5 questions would be your score.</p><p>Good Luck!</p>";
+    homeBtnEl.className="btn startbtn homebtn";
+    mainItemEl.innerHTML= "<h1>Coding Quiz Challenge</h1><div><br>Try to answer the following 4 questions as fast as possible</div><div><br>For each wrong answer, 10 seconds would be deducted from your time</div><div>Time remaining at the end of 4 questions would be your score.</div><div><br>You have 30 seconds.</div><div><br><br>Good Luck!</div>";
     mainItemEl.className="firstpage";
     var startBtnEl=document.createElement("button");
     startBtnEl.textContent="Start Quiz";
@@ -210,7 +234,7 @@ var reset = function() {
     mainItemEl.appendChild(scoreBtnEl);
     bodyItemEl.appendChild(mainItemEl);
     startBtnEl.addEventListener("click",question);
-    timeEl.style.display="none";
+    scoreBtnEl.addEventListener("click",scoreBoard);
 };
 
 

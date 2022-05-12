@@ -8,10 +8,18 @@ body {
     height: 100vh;
     width: 100vw;
     position: relative;
+    text-align: center;
 }
+
 .main {
     width: 85%;
 }
+
+div.name {
+    width: 100%;
+    text-align: center;
+}
+
 header {
     display: block;
     background-color: antiquewhite;
@@ -34,11 +42,6 @@ right: 35px;
 }
 
 .firstpage {
-    /* text-align: center;
-    position: relative;
-    top : 200px;
-    left: -40px;
-    transform: translate(0%, 100%); */
     display: block;
     flex-wrap: wrap;
     justify-content: center;
@@ -89,7 +92,7 @@ hr {
 .btn {
     outline: 2px; 
     margin:3px;
-    display: inline-block;
+    display: inline;
     border-radius: 12px;
     box-shadow: 1px 1px grey; 
   }
@@ -103,9 +106,10 @@ hr {
 }
 
 .homebtn {
-    position: relative;
-    top: 80px;
-    left: 30px;
+    position:relative;
+    top:80px;
+    left: 20px;
+  
 }
 
 .viewbtn {
@@ -113,6 +117,7 @@ hr {
     top:80px;
     left: 20px;
 }
+
 
 .btn:hover {
     background-color: antiquewhite;
@@ -122,3 +127,23 @@ hr {
     background-color: rgb(123, 190, 221);
 }
 
+p.nameline, p.scoreclass{
+   
+    font-weight: bold;
+    color: rgb(21, 4, 118);
+
+}
+span.ascouple, span.ascouple2{
+    display: inline-block;
+    margin-left: 5px;
+    font-weight: normal;
+    color: black;
+    
+}
+.scoreclass {
+    margin-left: 20px;
+}
+
+p {
+    display: inline;
+}
